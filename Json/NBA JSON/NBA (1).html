@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>NBA</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        .fetched_info,
+        .data-players,
+        .data-games {
+            display: block
+        }
+        
+        .content {
+            height: auto;
+        }
+    </style>
+
+    <!-- https://www.thesportsdb.com/api/v1/json/40130162/lookup_all_players.php?id=134864 -->
+</head>
+
+<body>
+
+
+
+    <body>
+        <div class="dash">
+
+            <div class="dash-left">
+                <div class="logo"><img src="https://www.pikpng.com/pngl/b/473-4739689_rsvp-betekenis-logo-the-score-band-clipart.png" alt=""></div>
+            </div>
+
+
+            <div class="dash-right">
+                <div class="hdr">
+                    <!-- preko JS ubaciti background na ovaj div-->
+                </div>
+
+                <div class="fetched_info">
+                    <div class="fetched-content">
+                        <div class="content data-overview content-active">
+                            <div class="o_games-hdr">Team Profile</div>
+                            <div class="o_desc">
+                                <!-- preko JS dohvatit ovdje description tima-->
+                            </div>
+                        </div>
+
+
+                        <div class="content data-players">
+                            <h4>Players</h4>
+                            <div class="players games-flex">
+                                <!--<div class="players-item">	
+									<div class="players-item-image"><img src="....."></div>
+									<div class="players-item-desc">
+										<div class="players-name">Aron Baynes</div>
+										<div class="players-position">Center</div>
+									</div>
+							</div> -->
+                            </div>
+                        </div>
+                        <div class="footer"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function() {
+
+                $.getJSON("https://www.thesportsdb.com/api/v1/json/40130162/lookup_all_players.php?id=134864", function(data) {
+                    var output = "";
+                    for (var i in data.player) {
+                        console.log(data.player[i]);
+                        console.log(data.player[i]["strCutout"]);
+                        output += "<div class = 'players-item'>";
+                        output += "<div class = 'players-item-image'><img src='" + data.player[i]["strCutout"] + "'></div>";
+                        output += "<div class = 'players-item-desc'>";
+                        output += "<div class = 'players-name'>" + data.player[i]["strPlayer"] + "</div>";
+                        output += "<div class='players-position'>" + data.player[i]["strPosition"] + "</div>";
+                        output += "</div>";
+                        output += "</div>";
+                    }
+                    console.log(output);
+                    $("#players games-flex").innerHTML = output;
+                    document.getElementsByClassName("players")[0].innerHTML = output;
+                });
+
+                $.getJSON("https://www.thesportsdb.com/api/v1/json/40130162/lookupteam.php?id=134864", function(podatci) {
+                    document.getElementsByClassName("hdr")[0].innerHTML = "<img src='" + podatci.teams[0]["strStadiumThumb"] + "'>";
+                    document.getElementsByClassName("o_desc")[0].innerHTML = podatci.teams[0]["strStadiumDescription"];
+                });
+            });
+        </script>
+    </body>
+
+</html>

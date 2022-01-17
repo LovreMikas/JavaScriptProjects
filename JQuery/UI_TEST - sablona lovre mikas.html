@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI</title>
+
+  <style>
+	.crvena{ background-color:red}
+	.green{ background-color:green}
+	#users tr{background-color:blue}
+    label, input { display:block; }
+    input.text { margin-bottom:12px; width:95%; padding: .4em; }
+    fieldset { padding:0; border:0; margin-top:25px; }
+    h1 { font-size: 1.2em; margin: .6em 0; }
+    div#users-contain { width: 350px; margin: 20px 0; }
+    div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+    div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left;  background-color:white}
+    .ui-dialog .ui-state-error { padding: .3em; }
+    .validateTips { border: 1px solid transparent; padding: 0.3em; }
+	#users tr .ui-selected{background-color:red}
+	.draggable { width: 90px; height: 80px; padding: 5px; float: left; margin: 0 10px 10px 0; font-size: .9em; }
+	.ui-widget-header p, .ui-widget-content p { margin: 0; }
+	#snaptarget { height: 140px; }
+  </style>
+
+</head>
+<body>
+ 
+	<div id="dialog-form" title="Create new user">
+	  <p class="validateTips">All form fields are required.</p>
+	   <form>
+		<fieldset>
+		  <label for="name">Name</label>
+		  <input type="text" name="name" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-all">
+		  <label for="email">Email</label>
+		  <input type="text" name="email" id="email" value="jane@smith.com" class="text ui-widget-content ui-corner-all">
+		  <label for="password">Password</label>
+		  <input type="password" name="password" id="password" value="xxxxxxx" class="text ui-widget-content ui-corner-all">
+	 
+		  <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+		</fieldset>
+	  </form>
+	</div>
+	 
+	 
+
+	<button id="create-user">Create new user</button>
+
+	<button id="brisi_sve">Hide all pass</button>
+
+
+	<div id="tabs">
+		<ul>
+			<li><a href="#tabs-1">Exis</a></li>
+			<li><a href="#tabs-2">Testing</a></li>
+		</ul>
+
+	<div id="tabs-1" class ="tablink" >
+	<h3>Existing Users</h3>
+	<div id="users-contain" class="ui-widget">
+	  <table id="users" class="ui-widget ui-widget-content">
+		<thead>
+		  <tr class="ui-widget-header ">
+			<th>dolazak</th>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Password</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  <tr>
+			<td><button class="klikni">X</button>
+			</td>
+			<td >John Doe</td>
+			<td >john.doe@example.com</td>
+			<td class="pass" >johndoe1</td>
+		  </tr>
+		  <tr>
+			<td><button class="klikni">X</button></td>
+			<td >John Doe</td>
+			<td >john.doe@example.com</td>
+			<td class="pass">johndoe1</td>
+		  </tr>
+		  <tr>
+			<td><button class="klikni">X</button></td >
+			<td >John Doe</td>
+			<td >john.doe@example.com</td>
+			<td class="pass">johndoe1</td>
+		  </tr>
+		  
+		</tbody>
+	  </table>
+	</div>
+	</div>
+	<div id="tabs-2" class ="tablink">
+		<h3>Testing</h3>
+		<div id="snaptarget" style="border: 1px solid black">
+			<p>Testing</p>
+		</div>
+		 
+		<br style="clear:both">
+		 
+		<div id="draggable1" class="draggable ui-widget-content">
+		  <p>AAAA</p>
+		</div>
+		 
+		<div id="draggable2" class="draggable ui-widget-content">
+		  <p>BBBB</p>
+		</div>
+		 
+		<div id="draggable3" class="draggable ui-widget-content">
+		  <p>CCCC</p>
+		</div>
+	</div>
+	</div>
+	<script>
+		var text = "upisan";
+		var sif = "XXXXXXXX";
+		$(document).ready(function() {
+			$('#tabs').tabs();
+			$('.klikni').click(function(){
+  				$(this).toggleClass('green');
+				  $(this).html(text);
+			});
+			$("#users").selectable(function(){
+   				$(this).addClass('crvena');       
+		});
+		$("#draggable1").draggable({
+        scroll:true,
+        revert:true,
+        snap:true,
+        snap:"#container",
+    });
+	$("#draggable2").draggable({
+        scroll:true,
+        snap:true,
+        snap:"#snaptarget",
+		containment:"#snaptarget",
+    });
+	$("#draggable3").draggable({
+        scroll:true,
+        revert:true,
+        snap:true,
+        snap:"#container",
+
+    });
+	$("#snaptarget").droppable({
+      	  accept:"#draggable2",
+	      drop:function(event , ui){
+          $(this).addClass("green");
+      }
+    });
+			
+		});
+		$('#brisi_sve').click(function(){
+				  $('.pass').html(sif);
+			});
+			//copy .....
+			$( function() {
+				var dialog, form,
+
+			
+			emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+			name = $( "#name" ),
+			email = $( "#email" ),
+			password = $( "#password" ),
+			allFields = $( [] ).add( name ).add( email ).add( password ),
+			tips = $( ".validateTips" );
+
+		function updateTips( t ) {
+			tips
+				.text( t )
+				.addClass( "ui-state-highlight" );
+			setTimeout(function() {
+				tips.removeClass( "ui-state-highlight", 1500 );
+			}, 500 );
+		}
+
+		function checkLength( o, n, min, max ) {
+			if ( o.val().length > max || o.val().length < min ) {
+				o.addClass( "ui-state-error" );
+				updateTips( "Length of " + n + " must be between " +
+					min + " and " + max + "." );
+				return false;
+			} else {
+				return true;
+			}
+		}
+
+		function checkRegexp( o, regexp, n ) {
+			if ( !( regexp.test( o.val() ) ) ) {
+				o.addClass( "ui-state-error" );
+				updateTips( n );
+				return false;
+			} else {
+				return true;
+			}
+		}
+
+		function addUser() {
+			var valid = true;
+			allFields.removeClass( "ui-state-error" );
+
+			valid = valid && checkLength( name, "username", 3, 16 );
+			valid = valid && checkLength( email, "email", 6, 80 );
+			valid = valid && checkLength( password, "password", 5, 16 );
+
+			valid = valid && checkRegexp( name, /^[a-z]([0-9a-z_\s])+$/i, "Username may consist of a-z, 0-9, underscores, spaces and must begin with a letter." );
+			valid = valid && checkRegexp( email, emailRegex, "eg. ui@jquery.com" );
+			valid = valid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
+
+			if ( valid ) {
+				$( "#users tbody" ).append(
+					"<tr><td><button class='klikni ui-selectee green'>Upisan automatski</button></td>" +
+					"<td>" + name.val() + "</td>" +
+					"<td>" + email.val() + "</td>" +
+					"<td class='pass'>" + password.val() + "</td>" +
+				"</tr>" );
+				dialog.dialog( "close" );
+			}
+			return valid;
+		}
+
+		dialog = $( "#dialog-form" ).dialog({
+			autoOpen: false,
+			height: 400,
+			width: 350,
+			modal: true,
+			buttons: {
+				"Dodaj korisnika": addUser,
+				Cancel: function() {
+					dialog.dialog( "Zatvori" );
+				}
+			},
+			close: function() {
+				form[ 0 ].reset();
+				allFields.removeClass( "ui-state-error" );
+			}
+		});
+
+		form = dialog.find( "form" ).on( "submit", function( event ) {
+			event.preventDefault();
+			addUser();
+		});
+
+		$( "#create-user" ).button().on( "click", function() {
+			dialog.dialog( "open" );
+		});
+	} );
+
+</script>
+</body>
+</html>

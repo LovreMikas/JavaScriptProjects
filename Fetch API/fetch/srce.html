@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>fetch API random todo quote</title>
+  
+  <style>
+	* {
+		box-sizing: border-box;
+		font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	}
+	body {
+		background: linear-gradient(pink, rgb(121, 121, 248));
+		background-repeat: no-repeat;
+		height: 100vh;
+		text-align: center;
+		padding: 50px;
+	}
+	#heart {
+		position: relative;
+		width: 100px;
+		height: 90px;
+		background: transparent;
+		border: none;
+		cursor:pointer;
+		transition: transform 0.5s ease;
+	}
+	#heart::before {
+		position: absolute;
+		content: '';
+		top: 0;
+		left: 15px;
+		width: 50px;
+		height: 78px;
+		border-radius: 50px 50px 0 0;
+		background: purple;
+		transform: rotate(-45deg);
+	}
+	#heart::after {
+		position: absolute;
+		content: '';
+		top: 0;
+		right: 15px;
+		width: 50px;
+		height: 78px;
+		border-radius: 50px 50px 0 0;
+		background: purple;
+		transform: rotate(45deg);
+	}
+	h1 {
+		color: #fff;
+		background: linear-gradient(purple, black);
+		height: auto;
+		padding: 30px;
+	}
+	h4 {
+		transition: all 0.5s ease;
+		font-size: 2rem;
+		color: purple;
+		transform: translateX(0%);
+	}
+  </style>
+</head>
+<body>
+
+	<h1>What to do today?</h1>
+	<h4 id="activityPlace">Find something to do</h4>
+	<button id="heart" onclick="srce()"></button>
+
+
+
+	<script>
+        
+        
+        function srce(){
+        
+        fetch("https://www.boredapi.com/api/activity")
+        .then(result => result.json()) 
+        .then(res => {
+            document.getElementById('activityPlace').innerHTML = res.activity;
+            
+        });
+        
+    }
+    
+    
+    srce();
+		
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!--ZBROJ ČLANOVA NIZA-->
+<html>
+<body>
+<script>
+alert("Open Console at the end ! 1.first num , 2. secodnd num, 3. operator, and random text!");
+let prvibroj = Number(prompt("unesi prvi broj"));
+let drugibroj = Number(prompt("unesi drugi broj"));
+let operacija = prompt("unesi operaciju broj");
+
+ 
+    
+function Zbrajanje(prvibroj,drugibroj){
+    
+    let zbroj = prvibroj + drugibroj;
+    return zbroj;
+}   
+    
+function djeljenje(prvibroj,drugibroj){}
+    
+    
+if(operacija == "+"){
+    let rez = Zbrajanje(prvibroj, drugibroj);
+    console.log(rez);
+} 
+
+else if(operacija == "-"){
+    let rez = oduzimanje(prvibroj, drugibroj);
+    console.log(rez);
+}
+    
+else if(operacija == "*"){
+    let rez = mnozenje(prvibroj, drugibroj);
+    console.log(rez);
+}
+    
+else{
+    let rez = djeljenje(prvibroj, drugibroj);
+    console.log(rez);
+    
+}
+    
+    
+</script>     
+</body>
+</html>
+
+
+<!--OD KOJIH SE LOVA SASTOJI?-->
+<html>
+<body>
+<script>
+
+let rijec = prompt("unesi rijec:");
+let slova = [];
+    
+function rastavljanje(rijec){
+    
+    for(i = 0; i < rijec.length; i++){
+        slova.push(rijec[i])
+        console.log(slova)
+        
+    }
+    
+    return slova;
+        
+}
+    
+prikazivanje = rastavljanje(rijec);
+console.log(prikazivanje.join(", "));
+ 
+
+    
+</script>     
+</body>
+</html>

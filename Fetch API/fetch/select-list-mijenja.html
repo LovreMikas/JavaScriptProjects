@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Select option - Fetch API example</title>
+  <meta charset="utf-8">
+  <meta name="color-scheme" content="dark">
+  <style>
+	* {
+		margin: 0;
+	}
+	body {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding-block: var(--padding-md);
+		padding-inline: var(--padding-xs);
+	}
+	pre {
+		max-inline-size: max-content;
+	}
+	form {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--padding-xs);
+	}
+  </style>
+</head>
+
+<body>
+	<h1>A basic Fetch API example</h1>
+	<form>
+		<label for="verse-selector">Choose a verse:</label>
+		
+		<select id="verse-selector" name="verse-selector"  onchange="select(this.value)">
+			<option value="verse1" selected>Verse 1</option>
+			<option value="verse2">Verse 2</option>
+			<option value="verse3">Verse 3</option>
+			<option value="verse4">Verse 4</option>
+		</select>
+	</form>
+
+	<p class="text-500 weight-bold">
+		The Conqueror Worm, <em>Edgar Allen Poe, 1843</em>
+	</p>
+	<pre></pre>
+	
+	<script>
+        
+        function select(vrijednost){
+            
+        const link = "https://raw.githubusercontent.com/mdn/learning-area/main/javascript/apis/fetching-data/";
+        const aaa = link + verse + ".txt";
+            
+        
+        fetch(aaa)
+        .then(result => result.txt()) 
+        .then(text => {
+        document.getElementById('').innerHTML = text;
+            
+        });
+        
+    }
+    
+        select();
+ 
+        
+        
+      
+	
+	</script>
+</body>
+</html>
